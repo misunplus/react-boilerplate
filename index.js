@@ -3,6 +3,8 @@ const app = express();
 const port = 5000;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
+const config = require('./config/key');
 // 유저 정보 가져오기
 const {User} = require("./models/User");
 
@@ -14,14 +16,14 @@ app.use(bodyParser.json());
 
 
 
-mongoose.connect('mongodb+srv://beckia:1704misun!@boilerplate.bffjl.mongodb.net/boilerplate?retryWrites=true&w=majority',{
+mongoose.connect(config.mongoURI,{
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 }).then(() => console.log('mongoDB Connected..'))
     .catch(err => console.log(err))
 
 
 
-app.get('/', (req,res) => res.send('Hello World!'))
+app.get('/', (req,res) => res.send('Hello World!nn'))
 
 app.post('/register', (req, res) => {
     // 회원가입에 필요한 정보를 클라이언트에서 가져오면
