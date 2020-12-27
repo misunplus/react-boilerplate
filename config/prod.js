@@ -1,4 +1,4 @@
 // 배포후 db정보
 module.exports = {
-    mongoURI: process.eventNames.MONGO_URI
+    mongoURI: process.env.MONGO_URI
 }
