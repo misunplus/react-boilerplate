@@ -87,6 +87,21 @@ userSchema.methods.comparePassword = function(plainPassword, cb){
           cb(null, user)
       })
   }
+
+  userSchema.statics.findByToken = function( token, cb){
+      var user =this;
+    //   user._id + '' = token
+
+    //  토큰을 decode 한다.
+      jwt.verify(token, 'secretToken', function(err, decoded){
+
+
+        user.findOne({"_id":decoded, "token":  token}, function(err, user){
+            if(err) return cb(err);
+            cb(null, user);
+        })
+      })
+  }
 // 모델로 감싸주기 
 const User = mongoose.model('User', userSchema)
 
